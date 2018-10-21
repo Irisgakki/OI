@@ -7,7 +7,7 @@ const int inf = 1 << 30;
 int n, x, y;
 int hp;
 
-int main() {
+mainint main() {
     scanf("%lld %lld %lld", &n, &x, &y);
     for(register int i = 1; i <= n; ++i) {
         scanf("%lld", &hp);
