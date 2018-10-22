@@ -14,7 +14,7 @@ inline LL read() {
 }
 
 int n, a, b, c, d;
-LL x[maxn], odd = 0, even = 0;
+LL x0, odd = 0, even = 0, ans = 0;
 
 inline int get(int x) {
 	int cnt = 0;
@@ -26,12 +26,11 @@ inline int get(int x) {
 }
 
 int main() {
-	n = read(), a = read(), b = read(), c = read(), d = read(), x[0] = read();
-	for(rg int i = 1; i <= n; ++i)
-		x[i] = (a * x[i - 1] * x[i - 1] % d + b * x[i - 1] % d + c % d) % d;
+	n = read(), a = read(), b = read(), c = read(), d = read(), x0 = read();
 	for(rg int i = 1; i <= n; ++i) {
-		if(get(x[i]) & 1) odd++;
-		else even++;
+		x0 = (a * x0 % d * x0 % d + b * x0 % d + c) % d;
+		if(get(x0) & 1) odd++;
+		else even++; 
 	}
 	printf("%lld\n", odd * even);
 	return 0;
