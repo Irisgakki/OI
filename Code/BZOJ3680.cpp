@@ -27,9 +27,9 @@ inline void SimulateAnneal() {
 		double dy = nowy + T * (2 * Rand() - 1);
 		double delta = cal(dx, dy) - cal(nowx, nowy);
 		if(exp(-delta / T) > Rand()) nowx = dx, nowy = dy;
-		T *= 0.97;
+		T *= 0.98;
 	}
-	for(register int i = 1; i <= 1000; ++i) {
+	for(register int i = 1; i <= 10000; ++i) {
 		double dx = ansx + T * (2 * Rand() - 1);
 		double dy = ansy + T * (2 * Rand() - 1);
 		cal(dx, dy);
