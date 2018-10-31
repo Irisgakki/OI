@@ -1,40 +1,58 @@
 #include <bits/stdc++.h>
-#define rr register
-const int maxn = 1000010;
-const int inf = 1 << 30;
-const int mod = 998244353;
+#define rep(i,l,r) for(register int i = l; i <= r; ++i)
+#define dep(i,r,l) for(register int i = r; i >= l; --i)
+typedef long long LL;
+const int maxn = 100010;
+const int inf = 0x3f3f3f3f;
 
-inline LL read() {
-	register LL x = 0, g = 1;
-	register char ch = getchar();
-	while(ch < '0' || ch > '9') { if(ch == '-') g = -1; ch = getchar(); }
-	while(ch >= '0' && ch <= '9') {x = (((x << 2) + x) << 1) + (ch ^ '0'); ch = getchar(); }
-	return x * g;
+inline int read() {
+	register int g = 1; register char ch;
+	while(!isdigit(ch=getchar()));
+	register int x = ch ^ '0';
+	while(isdigit(ch=getchar())) x=(((x<<2)+x)<<1)+(ch^'0');
+	return x*g;
 }
 
-LL n, m;
-LL d[maxn];
+int n, m;
 struct Edge{
-	LL next, to, dis;
-}e[maxn << 1];
-LL head[maxn], cnt = 0;
+	int next, to, val;
+} e[maxn << 1];
+int head[maxn], cnt = 0;
+int dis[maxn], vis[maxn];
 
-inline void add(LL u, LL v, LL w) { e[++cnt] = (Edge){head[u], v, w}; head[u] = cnt; }
+inline void add(int u, int v, int w) {e[++cnt] = (Edge) {head[u], v, w}; head[u] = cnt;}
 
-inline void dfs(int now) {
-	
+inline void spfa(){
+	memset(dis, 0, sizeof(dis));
+	memset(vis, 0, sizeof(vis));
+	std::queue<int> q;
+	dis[1] = 0;
+	vis[1] = 1;
+	q.push(1);
+	while(!q.empty()) {
+		int now = q.front(); q.pop();
+		vis[now] = 0;
+		for(register int i = head[now]; i; i = e[i].next) {
+			int to = e[i].to;
+			if(dis[to] < dis[now] + e[i].val) {
+				dis[to] = dis[now] + e[i].val;
+				if(!vis[to]) {
+					vis[to] = 1;
+					q.push(to);
+				}
+			}
+		}
+	}
 }
 
-int main() {
+int main(){
 	n = read(), m = read();
-	d[0] = 1;
-	for(rr int i = 1; i <= m; ++i)
-		d[i] = (d[i - 1] * 29) % mod;
-	for(rr int i = 1; i <= m; ++i)
-		add(read(), read(), read());
-	for(rr int i = 1; i <= n; ++i) {
-		dfs(i);
-
+	rep(i,1,m) {
+		int u = read(), v = read(), w = read();
+		add(u, v, w);
 	}
+	spfa();
+	if(dis[n] == 0) printf("-1\n");
+	else printf("%d\n", dis[n]);
 	return 0;
 }
