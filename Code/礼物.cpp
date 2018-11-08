@@ -7,7 +7,6 @@ const int maxn = 2001000;
 const int inf = 0x3f3f3f3f;
 const int mod = 1e9 + 7;
 
-
 inline int read() {
 	register int g = 1; register char ch;
 	while(!isdigit(ch = getchar())) {if(ch == '-') g = -1;}
