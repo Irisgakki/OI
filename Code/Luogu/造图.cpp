@@ -23,7 +23,7 @@ int main() {
         s = rand();
         n = 10;
         m = 20;
-        printf("%d %d \n",n,m);
+        printf("%d %d \n", n, m);
         for(int i = 1 ; i <= m ; i++) {
             int u = random() % n + 1;
             int v = random() % n + 1;
